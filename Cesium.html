@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo Cesium</title>
+    <link rel="stylesheet" href="https://cesiumjs.org/releases/1.108/Build/Cesium/Widgets/widgets.css">
+    <script src="https://cesiumjs.org/releases/1.108/Build/Cesium/Cesium.js"></script>
+    <style>
+        /* Estilização para ajustar o tamanho do globo 3D */
+        #cesiumContainer {
+            width: 100%;
+            height: 890px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+
+    <script>
+        // Inicializar a cena Cesium
+        var viewer = new Cesium.Viewer('cesiumContainer');
+
+        // Adicionar um marcador de posição em uma localização específica
+        var position = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128); // Longitude e Latitude (Nova York)
+        viewer.entities.add({
+            position: position,
+            point: {
+                pixelSize: 10,
+                color: Cesium.Color.RED,
+                outlineColor: Cesium.Color.BLACK,
+                outlineWidth: 2
+            },
+            label: {
+                text: 'Nova York',
+                font: '14px sans-serif',
+                fillColor: Cesium.Color.YELLOW,
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                outlineWidth: 2,
+                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                pixelOffset: new Cesium.Cartesian2(0, -9)
+            }
+        });
+
+        // Definir a câmera para a posição do marcador
+        viewer.camera.flyTo({
+            destination: position,
+            duration: 2 // Tempo da animação em segundos
+        });
+    </script>
+</body>
+</html>
